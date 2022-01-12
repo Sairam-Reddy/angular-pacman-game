@@ -102,7 +102,7 @@ const KEY = {
 
 export class Pacman {
   public state = WAITING;
-  public audio = null;
+  public audio: PacmanAudio = null;
   public ghosts = [];
   public ghostSpecs = ['#00FFDE', '#FF0000', '#FFB8DE', '#FFB847'];
   public eatenCount = 0;
@@ -134,6 +134,7 @@ export class Pacman {
       ((position['new']['y'] + 5) / 10) * this.map.blockSize
     );
   }
+  0;
 
   public dialog(text) {
     this.ctx.fillStyle = '#FFFF00';
