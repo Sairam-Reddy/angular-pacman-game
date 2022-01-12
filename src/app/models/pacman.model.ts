@@ -440,12 +440,20 @@ export class Pacman {
   }
 
   public loaded() {
-    this.dialog('Press N to Start');
+    if (this.state === WAITING) {
+      this.dialog('Press N to Start');
+    }
 
     document.addEventListener('keydown', this.keyDown.bind(this), true);
     document.addEventListener('keypress', this.keyPress.bind(this), true);
 
-    if (!this.timer) {
+    if (this.timer) {
+      window.clearInterval(this.timer);
+      this.timer = window.setInterval(
+        this.mainLoop.bind(this),
+        1000 / PACMAN.FPS
+      );
+    } else {
       this.timer = window.setInterval(
         this.mainLoop.bind(this),
         1000 / PACMAN.FPS
