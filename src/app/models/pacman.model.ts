@@ -254,7 +254,11 @@ export class Pacman {
   }
 
   public mainDraw() {
-    var diff, u, i, len, nScore;
+    let diff;
+    let u;
+    let i;
+    let len;
+    let nScore;
 
     this.ghostPos = [];
 
@@ -296,7 +300,7 @@ export class Pacman {
   }
 
   public mainLoop() {
-    var diff;
+    let diff;
 
     if (this.state !== PAUSE) {
       ++this.tick;
