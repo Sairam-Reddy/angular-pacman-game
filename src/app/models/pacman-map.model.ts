@@ -66,7 +66,7 @@ export class PacmanMap {
   }
 
   public reset() {
-    this.map = PACMAN.MAP.clone();
+    this.map = PACMAN.MAP;
     this.height = this.map.length;
     this.width = this.map[0].length;
   }
