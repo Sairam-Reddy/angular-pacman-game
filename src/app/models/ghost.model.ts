@@ -1,4 +1,5 @@
 import { DOWN, LEFT, PACMAN, RIGHT, UP } from '../constants/pacman.constants';
+import { PacmanMap } from './pacman-map.model';
 
 export class Ghost {
   public position = null;
@@ -8,7 +9,7 @@ export class Ghost {
   public due = null;
 
   public game;
-  public map;
+  public map: PacmanMap;
   public colour;
 
   public constructor(game, map, colour) {
@@ -242,7 +243,7 @@ export class Ghost {
 
     if (
       onGrid &&
-      this.map.isWallSpace({
+      this.map.isWall({
         y: this.pointToCoord(this.nextSquare(npos.y, this.direction)),
         x: this.pointToCoord(this.nextSquare(npos.x, this.direction)),
       })
