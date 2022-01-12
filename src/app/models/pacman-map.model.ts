@@ -66,9 +66,25 @@ export class PacmanMap {
   }
 
   public reset() {
-    this.map = PACMAN.MAP;
+    this.map = this.clone(PACMAN.MAP);
     this.height = this.map.length;
     this.width = this.map[0].length;
+  }
+
+  public clone(obj) {
+    var i,
+      newObj = obj instanceof Array ? [] : {};
+    for (i in obj) {
+      if (i === 'clone') {
+        continue;
+      }
+      if (obj[i] && typeof obj[i] === 'object') {
+        newObj[i] = this.clone(obj[i]);
+      } else {
+        newObj[i] = obj[i];
+      }
+    }
+    return newObj;
   }
 
   public block(pos) {
