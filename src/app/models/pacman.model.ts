@@ -422,7 +422,7 @@ export class Pacman {
       ['eating2', root + 'audio/eating.short.' + extension],
     ];
 
-    this.load(audio_files, function () {
+    this.load(audio_files, () => {
       this.loaded();
     });
   }
@@ -432,7 +432,7 @@ export class Pacman {
       callback();
     } else {
       var x = arr.pop();
-      this.audio.load(x[0], x[1], function () {
+      this.audio.load(x[0], x[1], () => {
         this.load(arr, callback);
       });
     }

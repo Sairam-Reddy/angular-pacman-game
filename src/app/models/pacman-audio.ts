@@ -13,7 +13,7 @@ export class PacmanAudio {
   public load(name, path, cb) {
     var f = (this.files[name] = document.createElement('audio'));
 
-    this.progressEvents[name] = function (event) {
+    this.progressEvents[name] = (event) => {
       this.progress(event, name, cb);
     };
 
