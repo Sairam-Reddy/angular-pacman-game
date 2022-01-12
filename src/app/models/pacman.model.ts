@@ -433,7 +433,7 @@ export class Pacman {
     } else {
       var x = arr.pop();
       this.audio.load(x[0], x[1], () => {
-        this.load(arr, callback);
+        this.load(arr, callback.bind(this));
       });
     }
   }
