@@ -441,9 +441,12 @@ export class Pacman {
   public loaded() {
     this.dialog('Press N to Start');
 
-    document.addEventListener('keydown', this.keyDown, true);
-    document.addEventListener('keypress', this.keyPress, true);
+    document.addEventListener('keydown', this.keyDown.bind(this), true);
+    document.addEventListener('keypress', this.keyPress.bind(this), true);
 
-    this.timer = window.setInterval(this.mainLoop, 1000 / PACMAN.FPS);
+    this.timer = window.setInterval(
+      this.mainLoop.bind(this),
+      1000 / PACMAN.FPS
+    );
   }
 }

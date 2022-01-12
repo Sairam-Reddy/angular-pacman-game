@@ -17,7 +17,11 @@ export class PacmanAudio {
       this.progress(event, name, cb);
     };
 
-    f.addEventListener('canplaythrough', this.progressEvents[name], true);
+    f.addEventListener(
+      'canplaythrough',
+      this.progressEvents[name].bind(this),
+      true
+    );
     f.setAttribute('preload', 'true');
     f.setAttribute('autobuffer', 'true');
     f.setAttribute('src', path);
@@ -62,11 +66,15 @@ export class PacmanAudio {
 
   public play(name) {
     if (!this.game.soundDisabled()) {
-      this.endEvents[name] = function () {
+      this.endEvents[name] = () => {
         this.ended(name);
       };
       this.playing.push(name);
-      this.files[name].addEventListener('ended', this.endEvents[name], true);
+      this.files[name].addEventListener(
+        'ended',
+        this.endEvents[name].bind(this),
+        true
+      );
       this.files[name].play();
     }
   }
