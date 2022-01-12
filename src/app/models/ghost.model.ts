@@ -267,13 +267,3 @@ export class Ghost {
     };
   }
 }
-
-// return {
-//   eat: eat,
-//   isVunerable: isVunerable,
-//   isDangerous: isDangerous,
-//   makeEatable: makeEatable,
-//   reset: reset,
-//   move: move,
-//   draw: draw,
-// };

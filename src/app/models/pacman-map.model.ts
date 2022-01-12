@@ -181,19 +181,3 @@ export class PacmanMap {
     ctx.closePath();
   }
 }
-
-// Pacman.Map = function (size) {
-//   return {
-//     draw: draw,
-//     drawBlock: drawBlock,
-//     drawPills: drawPills,
-//     block: block,
-//     setBlock: setBlock,
-//     reset: reset,
-//     isWallSpace: isWall,
-//     isFloorSpace: isFloorSpace,
-//     height: height,
-//     width: width,
-//     blockSize: blockSize,
-//   };
-// };

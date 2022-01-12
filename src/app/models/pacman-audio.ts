@@ -91,13 +91,3 @@ export class PacmanAudio {
     }
   }
 }
-
-// Pacman.Audio = function (game) {
-//   return {
-//     disableSound: disableSound,
-//     load: load,
-//     play: play,
-//     pause: pause,
-//     resume: resume,
-//   };
-// };
