@@ -115,7 +115,7 @@ export class Pacman {
   public lastTime = 0;
   public ctx = null;
   public timer = null;
-  public map = null;
+  public map: PacmanMap;
   public user = null;
   public stored = null;
 
