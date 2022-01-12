@@ -213,7 +213,7 @@ export class Ghost {
     ctx.fill();
   }
 
-  private pane(pos) {
+  public pane(pos) {
     if (pos.y === 100 && pos.x >= 190 && this.direction === RIGHT) {
       return { y: 100, x: -10 };
     }
