@@ -1,20 +1,16 @@
-import { PACMAN } from '../constants/pacman.constants';
+import {
+  COUNTDOWN,
+  DYING,
+  EATEN_PAUSE,
+  PACMAN,
+  PAUSE,
+  PLAYING,
+  WAITING,
+} from '../constants/pacman.constants';
 import { Ghost } from './ghost.model';
 import { PacmanAudio } from './pacman-audio';
 import { PacmanMap } from './pacman-map.model';
 import { PacmanUser } from './pacman-user.model';
-
-const NONE = 4;
-const UP = 3;
-const LEFT = 2;
-const DOWN = 1;
-const RIGHT = 11;
-const WAITING = 5;
-const PAUSE = 6;
-const PLAYING = 7;
-const COUNTDOWN = 8;
-const EATEN_PAUSE = 9;
-const DYING = 10;
 
 /* Human readable keyCode index */
 const KEY = {
