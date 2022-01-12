@@ -1,4 +1,5 @@
 import { PACMAN } from '../constants/pacman.constants';
+import { PacmanMap } from './pacman-map.model';
 
 const NONE = 4;
 const UP = 3;
@@ -70,7 +71,7 @@ export class PacmanUser {
   public keyMap = {};
 
   public game;
-  public map;
+  public map: PacmanMap;
 
   public constructor(game, map) {
     this.game = game;
@@ -203,7 +204,7 @@ export class PacmanUser {
 
     if (
       this.onGridSquare(this.position) &&
-      this.map.isWallSpace(this.next(npos, this.direction))
+      this.map.isWall(this.next(npos, this.direction))
     ) {
       this.direction = NONE;
     }
