@@ -116,7 +116,7 @@ export class Pacman {
   public ctx = null;
   public timer = null;
   public map: PacmanMap;
-  public user = null;
+  public user: PacmanUser;
   public stored = null;
 
   public constructor() {}
