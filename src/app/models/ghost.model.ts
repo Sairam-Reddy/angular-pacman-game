@@ -27,7 +27,7 @@ export class Ghost {
     this.colour = colour;
   }
 
-  private getNewCoord(dir, current) {
+  public getNewCoord(dir, current) {
     var speed = this.isVunerable() ? 1 : this.isHidden() ? 4 : 2,
       xSpeed = (dir === LEFT && -speed) || (dir === RIGHT && speed) || 0,
       ySpeed = (dir === DOWN && speed) || (dir === UP && -speed) || 0;
@@ -41,7 +41,7 @@ export class Ghost {
   /* Collision detection(walls) is done when a ghost lands on an
    * exact block, make sure they dont skip over it
    */
-  private addBounded(x1, x2) {
+  public addBounded(x1, x2) {
     var rem = x1 % 10,
       result = rem + x2;
     if (rem !== 0 && result > 10) {
@@ -52,19 +52,19 @@ export class Ghost {
     return x1 + x2;
   }
 
-  private isVunerable() {
+  public isVunerable() {
     return this.eatable !== null;
   }
 
-  private isDangerous() {
+  public isDangerous() {
     return this.eaten === null;
   }
 
-  private isHidden() {
+  public isHidden() {
     return this.eatable === null && this.eaten !== null;
   }
 
-  private getRandomDirection() {
+  public getRandomDirection() {
     var moves =
       this.direction === LEFT || this.direction === RIGHT
         ? [UP, DOWN]
@@ -72,7 +72,7 @@ export class Ghost {
     return moves[Math.floor(Math.random() * 2)];
   }
 
-  private reset() {
+  public reset() {
     this.eaten = null;
     this.eatable = null;
     this.position = { x: 90, y: 80 };
@@ -80,11 +80,11 @@ export class Ghost {
     this.due = this.getRandomDirection();
   }
 
-  private onWholeSquare(x) {
+  public onWholeSquare(x) {
     return x % 10 === 0;
   }
 
-  private oppositeDirection(dir) {
+  public oppositeDirection(dir) {
     return (
       (dir === LEFT && RIGHT) ||
       (dir === RIGHT && LEFT) ||
@@ -93,21 +93,21 @@ export class Ghost {
     );
   }
 
-  private makeEatable() {
+  public makeEatable() {
     this.direction = this.oppositeDirection(this.direction);
     this.eatable = this.game.getTick();
   }
 
-  private eat() {
+  public eat() {
     this.eatable = null;
     this.eaten = this.game.getTick();
   }
 
-  private pointToCoord(x) {
+  public pointToCoord(x) {
     return Math.round(x / 10);
   }
 
-  private nextSquare(x, dir) {
+  public nextSquare(x, dir) {
     var rem = x % 10;
     if (rem === 0) {
       return x;
@@ -118,15 +118,15 @@ export class Ghost {
     }
   }
 
-  private onGridSquare(pos) {
+  public onGridSquare(pos) {
     return this.onWholeSquare(pos.y) && this.onWholeSquare(pos.x);
   }
 
-  private secondsAgo(tick) {
+  public secondsAgo(tick) {
     return (this.game.getTick() - tick) / Pacman.FPS;
   }
 
-  private getColour() {
+  public getColour() {
     if (this.eatable) {
       if (this.secondsAgo(this.eatable) > 5) {
         return this.game.getTick() % 20 > 10 ? '#FFFFFF' : '#0000BB';
@@ -139,7 +139,7 @@ export class Ghost {
     return this.colour;
   }
 
-  private draw(ctx) {
+  public draw(ctx) {
     var s = this.map.blockSize,
       top = (this.position.y / 10) * s,
       left = (this.position.x / 10) * s;
@@ -225,7 +225,7 @@ export class Ghost {
     return false;
   }
 
-  private move(ctx) {
+  public move(ctx) {
     var oldPos = this.position,
       onGrid = this.onGridSquare(this.position),
       npos = null;

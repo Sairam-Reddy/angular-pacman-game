@@ -80,48 +80,48 @@ export class PacmanUser {
     this.initUser();
   }
 
-  private addScore(nScore) {
+  public addScore(nScore) {
     this.score += nScore;
     if (this.score >= 10000 && this.score - nScore < 10000) {
       this.lives += 1;
     }
   }
 
-  private theScore() {
+  public theScore() {
     return this.score;
   }
 
-  private loseLife() {
+  public loseLife() {
     this.lives -= 1;
   }
 
-  private getLives() {
+  public getLives() {
     return this.lives;
   }
 
-  private initUser() {
+  public initUser() {
     this.score = 0;
     this.lives = 3;
     this.newLevel();
   }
 
-  private newLevel() {
+  public newLevel() {
     this.resetPosition();
     this.eaten = 0;
   }
 
-  private resetPosition() {
+  public resetPosition() {
     this.position = { x: 90, y: 120 };
     this.direction = LEFT;
     this.due = LEFT;
   }
 
-  private reset() {
+  public reset() {
     this.initUser();
     this.resetPosition();
   }
 
-  private keyDown(e) {
+  public keyDown(e) {
     if (typeof this.keyMap[e.keyCode] !== 'undefined') {
       this.due = this.keyMap[e.keyCode];
       e.preventDefault();
@@ -131,22 +131,22 @@ export class PacmanUser {
     return true;
   }
 
-  private getNewCoord(dir, current) {
+  public getNewCoord(dir, current) {
     return {
       x: current.x + ((dir === LEFT && -2) || (dir === RIGHT && 2) || 0),
       y: current.y + ((dir === DOWN && 2) || (dir === UP && -2) || 0),
     };
   }
 
-  private onWholeSquare(x) {
+  public onWholeSquare(x) {
     return x % 10 === 0;
   }
 
-  private pointToCoord(x) {
+  public pointToCoord(x) {
     return Math.round(x / 10);
   }
 
-  private nextSquare(x, dir) {
+  public nextSquare(x, dir) {
     var rem = x % 10;
     if (rem === 0) {
       return x;
@@ -157,25 +157,25 @@ export class PacmanUser {
     }
   }
 
-  private next(pos, dir) {
+  public next(pos, dir) {
     return {
       y: this.pointToCoord(this.nextSquare(pos.y, dir)),
       x: this.pointToCoord(this.nextSquare(pos.x, dir)),
     };
   }
 
-  private onGridSquare(pos) {
+  public onGridSquare(pos) {
     return this.onWholeSquare(pos.y) && this.onWholeSquare(pos.x);
   }
 
-  private isOnSamePlane(due, dir) {
+  public isOnSamePlane(due, dir) {
     return (
       ((due === LEFT || due === RIGHT) && (dir === LEFT || dir === RIGHT)) ||
       ((due === UP || due === DOWN) && (dir === UP || dir === DOWN))
     );
   }
 
-  private move(ctx) {
+  public move(ctx) {
     var npos = null,
       nextWhole = null,
       oldPosition = this.position,
@@ -248,12 +248,12 @@ export class PacmanUser {
     };
   }
 
-  private isMidSquare(x) {
+  public isMidSquare(x) {
     var rem = x % 10;
     return rem > 3 || rem < 7;
   }
 
-  private calcAngle(dir, pos) {
+  public calcAngle(dir, pos) {
     if (dir == RIGHT && pos.x % 10 < 5) {
       return { start: 0.25, end: 1.75, direction: false };
     } else if (dir === DOWN && pos.y % 10 < 5) {
@@ -266,7 +266,7 @@ export class PacmanUser {
     return { start: 0, end: 2, direction: false };
   }
 
-  private drawDead(ctx, amount) {
+  public drawDead(ctx, amount) {
     var size = this.map.blockSize,
       half = size / 2;
 
@@ -293,7 +293,7 @@ export class PacmanUser {
     ctx.fill();
   }
 
-  private draw(ctx) {
+  public draw(ctx) {
     var s = this.map.blockSize,
       angle = this.calcAngle(this.direction, this.position);
 

@@ -10,17 +10,17 @@ export class PacmanMap {
     this.reset();
   }
 
-  private withinBounds(y, x) {
+  public withinBounds(y, x) {
     return y >= 0 && y < this.height && x >= 0 && x < this.width;
   }
 
-  private isWall(pos) {
+  public isWall(pos) {
     return (
       this.withinBounds(pos.y, pos.x) && this.map[pos.y][pos.x] === Pacman.WALL
     );
   }
 
-  private isFloorSpace(pos) {
+  public isFloorSpace(pos) {
     if (!this.withinBounds(pos.y, pos.x)) {
       return false;
     }
@@ -32,7 +32,7 @@ export class PacmanMap {
     );
   }
 
-  private drawWall(ctx) {
+  public drawWall(ctx) {
     var i, j, p, line;
 
     ctx.strokeStyle = '#0000FF';
@@ -63,21 +63,21 @@ export class PacmanMap {
     }
   }
 
-  private reset() {
+  public reset() {
     this.map = Pacman.MAP.clone();
     this.height = this.map.length;
     this.width = this.map[0].length;
   }
 
-  private block(pos) {
+  public block(pos) {
     return this.map[pos.y][pos.x];
   }
 
-  private setBlock(pos, type) {
+  public setBlock(pos, type) {
     this.map[pos.y][pos.x] = type;
   }
 
-  private drawPills(ctx) {
+  public drawPills(ctx) {
     if (++this.pillSize > 30) {
       this.pillSize = 0;
     }
@@ -111,7 +111,7 @@ export class PacmanMap {
     }
   }
 
-  private draw(ctx) {
+  public draw(ctx) {
     var i,
       j,
       size = this.blockSize;
@@ -128,7 +128,7 @@ export class PacmanMap {
     }
   }
 
-  private drawBlock(y, x, ctx) {
+  public drawBlock(y, x, ctx) {
     var layout = this.map[y][x];
 
     if (layout === Pacman.PILL) {
