@@ -1,3 +1,4 @@
+import { PACMAN } from '../constants/pacman.constants';
 import { Ghost } from './ghost.model';
 import { PacmanAudio } from './pacman-audio';
 import { PacmanMap } from './pacman-map.model';
@@ -100,38 +101,6 @@ const KEY = {
 };
 
 export class Pacman {
-  public FPS = 30;
-  public WALL = 0;
-  public BISCUIT = 1;
-  public EMPTY = 2;
-  public BLOCK = 3;
-  public PILL = 4;
-  public MAP = [
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0],
-    [0, 4, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 4, 0],
-    [0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0],
-    [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
-    [0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0],
-    [0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0],
-    [0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0],
-    [2, 2, 2, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 2, 2, 2],
-    [0, 0, 0, 0, 1, 0, 1, 0, 0, 3, 0, 0, 1, 0, 1, 0, 0, 0, 0],
-    [2, 2, 2, 2, 1, 1, 1, 0, 3, 3, 3, 0, 1, 1, 1, 2, 2, 2, 2],
-    [0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0],
-    [2, 2, 2, 0, 1, 0, 1, 1, 1, 2, 1, 1, 1, 0, 1, 0, 2, 2, 2],
-    [0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0],
-    [0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0],
-    [0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0],
-    [0, 4, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 4, 0],
-    [0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0],
-    [0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0],
-    [0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0],
-    [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  ];
-  public WALLS = [];
-
   public state = WAITING;
   public audio = null;
   public ghosts = [];
@@ -346,12 +315,12 @@ export class Pacman {
       this.dialog('Press N to start a New game');
     } else if (
       this.state === EATEN_PAUSE &&
-      this.tick - this.timerStart > Pacman.FPS / 3
+      this.tick - this.timerStart > PACMAN.FPS / 3
     ) {
       this.map.draw(this.ctx);
       this.setState(PLAYING);
     } else if (this.state === DYING) {
-      if (this.tick - this.timerStart > Pacman.FPS * 2) {
+      if (this.tick - this.timerStart > PACMAN.FPS * 2) {
         this.loseLife();
       } else {
         this.redrawBlock(this.userPos);
@@ -361,11 +330,11 @@ export class Pacman {
         }
         this.user.drawDead(
           this.ctx,
-          (this.tick - this.timerStart) / (Pacman.FPS * 2)
+          (this.tick - this.timerStart) / (PACMAN.FPS * 2)
         );
       }
     } else if (this.state === COUNTDOWN) {
-      diff = 5 + Math.floor((this.timerStart - this.tick) / Pacman.FPS);
+      diff = 5 + Math.floor((this.timerStart - this.tick) / PACMAN.FPS);
 
       if (diff === 0) {
         this.map.draw(this.ctx);
@@ -442,7 +411,7 @@ export class Pacman {
     this.map.draw(this.ctx);
     this.dialog('Loading ...');
 
-    var extension = Modernizr.audio.ogg ? 'ogg' : 'mp3';
+    var extension = 'mp3';
 
     var audio_files = [
       ['start', root + 'audio/opening_song.' + extension],
@@ -475,12 +444,6 @@ export class Pacman {
     document.addEventListener('keydown', this.keyDown, true);
     document.addEventListener('keypress', this.keyPress, true);
 
-    this.timer = window.setInterval(this.mainLoop, 1000 / Pacman.FPS);
+    this.timer = window.setInterval(this.mainLoop, 1000 / PACMAN.FPS);
   }
 }
-
-// var PACMAN = (function () {
-//   return {
-//     init: init,
-//   };
-// })();

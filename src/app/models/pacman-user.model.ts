@@ -1,3 +1,5 @@
+import { PACMAN } from '../constants/pacman.constants';
+
 const NONE = 4;
 const UP = 3;
 const LEFT = 2;
@@ -226,18 +228,18 @@ export class PacmanUser {
     if (
       ((this.isMidSquare(this.position.y) ||
         this.isMidSquare(this.position.x)) &&
-        block === Pacman.BISCUIT) ||
-      block === Pacman.PILL
+        block === PACMAN.BISCUIT) ||
+      block === PACMAN.PILL
     ) {
-      this.map.setBlock(nextWhole, Pacman.EMPTY);
-      this.addScore(block === Pacman.BISCUIT ? 10 : 50);
+      this.map.setBlock(nextWhole, PACMAN.EMPTY);
+      this.addScore(block === PACMAN.BISCUIT ? 10 : 50);
       this.eaten += 1;
 
       if (this.eaten === 182) {
         this.game.completedLevel();
       }
 
-      if (block === Pacman.PILL) {
+      if (block === PACMAN.PILL) {
         this.game.eatenPill();
       }
     }

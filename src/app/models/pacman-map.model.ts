@@ -1,3 +1,5 @@
+import { PACMAN } from '../constants/pacman.constants';
+
 export class PacmanMap {
   public height = null;
   public width = null;
@@ -16,7 +18,7 @@ export class PacmanMap {
 
   public isWall(pos) {
     return (
-      this.withinBounds(pos.y, pos.x) && this.map[pos.y][pos.x] === Pacman.WALL
+      this.withinBounds(pos.y, pos.x) && this.map[pos.y][pos.x] === PACMAN.WALL
     );
   }
 
@@ -26,9 +28,9 @@ export class PacmanMap {
     }
     var peice = this.map[pos.y][pos.x];
     return (
-      peice === Pacman.EMPTY ||
-      peice === Pacman.BISCUIT ||
-      peice === Pacman.PILL
+      peice === PACMAN.EMPTY ||
+      peice === PACMAN.BISCUIT ||
+      peice === PACMAN.PILL
     );
   }
 
@@ -39,8 +41,8 @@ export class PacmanMap {
     ctx.lineWidth = 5;
     ctx.lineCap = 'round';
 
-    for (i = 0; i < Pacman.WALLS.length; i += 1) {
-      line = Pacman.WALLS[i];
+    for (i = 0; i < PACMAN.WALLS.length; i += 1) {
+      line = PACMAN.WALLS[i];
       ctx.beginPath();
 
       for (j = 0; j < line.length; j += 1) {
@@ -64,7 +66,7 @@ export class PacmanMap {
   }
 
   public reset() {
-    this.map = Pacman.MAP.clone();
+    this.map = PACMAN.MAP.clone();
     this.height = this.map.length;
     this.width = this.map[0].length;
   }
@@ -84,7 +86,7 @@ export class PacmanMap {
 
     for (let i = 0; i < this.height; i += 1) {
       for (let j = 0; j < this.width; j += 1) {
-        if (this.map[i][j] === Pacman.PILL) {
+        if (this.map[i][j] === PACMAN.PILL) {
           ctx.beginPath();
 
           ctx.fillStyle = '#000';
@@ -131,16 +133,16 @@ export class PacmanMap {
   public drawBlock(y, x, ctx) {
     var layout = this.map[y][x];
 
-    if (layout === Pacman.PILL) {
+    if (layout === PACMAN.PILL) {
       return;
     }
 
     ctx.beginPath();
 
     if (
-      layout === Pacman.EMPTY ||
-      layout === Pacman.BLOCK ||
-      layout === Pacman.BISCUIT
+      layout === PACMAN.EMPTY ||
+      layout === PACMAN.BLOCK ||
+      layout === PACMAN.BISCUIT
     ) {
       ctx.fillStyle = '#000';
       ctx.fillRect(
@@ -150,7 +152,7 @@ export class PacmanMap {
         this.blockSize
       );
 
-      if (layout === Pacman.BISCUIT) {
+      if (layout === PACMAN.BISCUIT) {
         ctx.fillStyle = '#FFF';
         ctx.fillRect(
           x * this.blockSize + this.blockSize / 2.5,
