@@ -190,6 +190,8 @@ export class Pacman {
     this.user.loseLife();
     if (this.user.getLives() > 0) {
       this.startLevel();
+    } else {
+      window.clearInterval(this.timer);
     }
   }
 
