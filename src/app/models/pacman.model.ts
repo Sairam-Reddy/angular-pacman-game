@@ -445,9 +445,11 @@ export class Pacman {
     document.addEventListener('keydown', this.keyDown.bind(this), true);
     document.addEventListener('keypress', this.keyPress.bind(this), true);
 
-    this.timer = window.setInterval(
-      this.mainLoop.bind(this),
-      1000 / PACMAN.FPS
-    );
+    if (!this.timer) {
+      this.timer = window.setInterval(
+        this.mainLoop.bind(this),
+        1000 / PACMAN.FPS
+      );
+    }
   }
 }
