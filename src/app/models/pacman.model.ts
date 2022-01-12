@@ -67,11 +67,11 @@ export class Pacman {
     }
     this.audio.play('start');
     this.timerStart = this.tick;
-    setState(COUNTDOWN);
+    this.setState(COUNTDOWN);
   }
 
   public startNewGame() {
-    setState(WAITING);
+    this.setState(WAITING);
     this.level = 1;
     this.user.reset();
     this.map.reset();
@@ -88,10 +88,10 @@ export class Pacman {
     } else if (e.keyCode === KEY.P && this.state === PAUSE) {
       this.audio.resume();
       this.map.draw(this.ctx);
-      setState(this.stored);
+      this.setState(this.stored);
     } else if (e.keyCode === KEY.P) {
       this.stored = this.state;
-      setState(PAUSE);
+      this.setState(PAUSE);
       this.audio.pause();
       this.map.draw(ctx);
       this.dialog('Paused');
@@ -102,7 +102,7 @@ export class Pacman {
   }
 
   public loseLife() {
-    setState(WAITING);
+    this.setState(WAITING);
     this.user.loseLife();
     if (this.user.getLives() > 0) {
       this.startLevel();
@@ -321,7 +321,7 @@ export class Pacman {
       this.ghosts.push(ghost);
     }
 
-    this.map.draw(ctx);
+    this.map.draw(this.ctx);
     this.dialog('Loading ...');
 
     var extension = Modernizr.audio.ogg ? 'ogg' : 'mp3';
@@ -336,7 +336,7 @@ export class Pacman {
     ];
 
     this.load(audio_files, function () {
-      loaded();
+      this.loaded();
     });
   }
 
